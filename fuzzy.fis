@@ -1,0 +1,95 @@
+[System]
+Name='fuzzy'
+Type='mamdani'
+Version=2.0
+NumInputs=4
+NumOutputs=6
+NumRules=6
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='Temperature'
+Range=[0 100]
+NumMFs=4
+MF1='very_low':'trapmf',[0 0 7 10]
+MF2='medium':'trimf',[7 15 25]
+MF3='high':'trimf',[20 30 40]
+MF4='very_high':'trapmf',[30 70 100 110]
+
+[Input2]
+Name='Pressure'
+Range=[0 110]
+NumMFs=3
+MF1='low':'trapmf',[0 0 20 22.5]
+MF2='medium':'trimf',[25 35 45]
+MF3='high':'trimf',[46 85 110]
+
+[Input3]
+Name='Lighting'
+Range=[0 1000]
+NumMFs=3
+MF1='sunshine':'trimf',[-40 0 50]
+MF2='evening':'trimf',[40 230 300]
+MF3='night':'trimf',[500 1000 1417]
+
+[Input4]
+Name='PIR'
+Range=[0 30]
+NumMFs=2
+MF1='no_motion':'trimf',[0 0 10]
+MF2='detected_motion':'trapmf',[5 14 22 30]
+
+[Output1]
+Name='Heater/boilers'
+Range=[0 100]
+NumMFs=2
+MF1='on':'trimf',[0 5 12]
+MF2='off':'trimf',[10 50 100]
+
+[Output2]
+Name='Volume'
+Range=[0 100]
+NumMFs=3
+MF1='low':'trimf',[0 0 10]
+MF2='medium':'trimf',[0 10 30]
+MF3='high':'trimf',[30 60 100]
+
+[Output3]
+Name='mircrophone/camera/gps'
+Range=[0 100]
+NumMFs=2
+MF1='on':'trimf',[0 5 12]
+MF2='off':'trimf',[10 50 100]
+
+[Output4]
+Name='Wifi_Acess'
+Range=[0 2400]
+NumMFs=2
+MF1='off':'trimf',[0 0 500]
+MF2='on':'trimf',[500 1400 2800]
+
+[Output5]
+Name='cooling_fans'
+Range=[0 100]
+NumMFs=2
+MF1='on':'trimf',[0 0 10]
+MF2='off':'trimf',[7 50 100]
+
+[Output6]
+Name='flood'
+Range=[0 20]
+NumMFs=2
+MF1='high':'trimf',[8 15 20]
+MF2='low':'trimf',[0 3 7]
+
+[Rules]
+1 1 1 1, 1 1 2 1 2 0 (1) : 1
+2 2 1 2, 2 1 1 2 1 0 (1) : 1
+4 3 0 0, 2 0 0 0 1 2 (1) : 1
+0 0 3 2, 1 1 1 2 2 2 (1) : 1
+0 3 0 0, 1 0 0 2 0 1 (1) : 1
+0 1 0 0, 2 0 0 2 0 2 (1) : 1
